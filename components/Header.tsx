@@ -9,19 +9,20 @@ export default function Header() {
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-neutral-100 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <a href="/" className="flex items-center gap-4">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
+          <a href="/" className="flex min-w-0 items-center gap-3 sm:gap-4">
             <img
               src="/yafeng-logo.png"
               alt="Yafeng logo"
-              className="h-16 w-16 rounded-sm object-cover md:h-20 md:w-20"
+              className="h-12 w-12 shrink-0 rounded-sm object-cover sm:h-16 sm:w-16 md:h-20 md:w-20"
             />
 
-            <div>
-              <p className="text-xl font-black tracking-wide text-[#d71920] md:text-3xl">
+            <div className="min-w-0">
+              <p className="max-w-[170px] text-xl font-black leading-tight tracking-wide text-[#d71920] sm:max-w-none sm:text-xl md:text-3xl">
                 雅楓集團發展有限公司
               </p>
-              <p className="text-xs font-semibold tracking-wide md:text-base">
+
+              <p className="mt-1 hidden text-xs font-semibold tracking-wide sm:block md:text-base">
                 YAFENG GROUP DEVELOPMENT LIMITED
               </p>
             </div>
@@ -65,9 +66,9 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setQuoteOpen(true)}
-            className="rounded-xl border border-neutral-200 px-3 py-2 font-black lg:hidden"
+            className="shrink-0 rounded-xl border border-neutral-200 px-3 py-2 text-sm font-black lg:hidden"
           >
-            獲取報價
+            報價
           </button>
         </div>
       </header>
