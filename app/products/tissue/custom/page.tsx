@@ -93,7 +93,7 @@ function PhoneDropdown({
             href="tel:90236020"
             className="block px-5 py-4 text-center text-sm font-black text-[#d71920] hover:bg-[#fff3d8]"
           >
-            90236020 孫小姐
+            孫小姐：90236020
           </a>
 
           <div className="h-px bg-orange-100" />
@@ -102,7 +102,7 @@ function PhoneDropdown({
             href="tel:63888290"
             className="block px-5 py-4 text-center text-sm font-black text-[#d71920] hover:bg-[#fff3d8]"
           >
-            63888290 吳小姐
+            吳小姐：63888290
           </a>
         </div>
       )}
