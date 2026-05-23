@@ -91,10 +91,10 @@ function MobileCustomTissuePage() {
 
           <div className="mt-6 grid gap-3">
             <a
-              href="tel:26120793"
+              href="tel:26120783"
               className="rounded-xl bg-[#d71920] px-5 py-3 text-center text-sm font-black text-white shadow-lg"
             >
-              致電查詢：26120793
+              致電查詢：26120783
             </a>
 
             <a
@@ -202,10 +202,10 @@ function MobileCustomTissuePage() {
         </p>
 
         <a
-          href="tel:26120793"
+          href="tel:26120783"
           className="mt-4 block rounded-xl bg-[#d71920] px-5 py-3 text-center text-sm font-black text-white shadow-md"
         >
-          立即聯絡：26120793
+          立即聯絡：26120783
         </a>
       </section>
     </div>
@@ -255,10 +255,10 @@ function DesktopCustomTissuePage() {
 
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-                  href="tel:26120793"
+                  href="tel:26120783"
                   className="rounded-xl bg-[#d71920] px-7 py-4 font-black text-white shadow-lg transition hover:bg-[#a80f15]"
                 >
-                  致電查詢：26120793
+                  致電查詢：26120783
                 </a>
 
                 <a
@@ -392,10 +392,10 @@ function DesktopCustomTissuePage() {
           </div>
 
           <a
-            href="tel:26120793"
+            href="tel:26120783"
             className="shrink-0 rounded-xl bg-[#d71920] px-8 py-4 text-center text-lg font-black text-white shadow-lg transition hover:bg-[#a80f15]"
           >
-            致電：26120793
+            致電：26120783
           </a>
         </div>
       </section>
