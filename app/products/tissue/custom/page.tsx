@@ -12,7 +12,7 @@ const customOptions = [
   },
   {
     title: "尺寸選擇",
-    desc: "提供盒裝抽紙、方盒、小盒、餐巾紙等多種尺寸選擇，可按客戶要求定制。",
+    desc: "提供盒裝抽紙、方盒、小盒、餐巾紙等多種尺寸選擇，實際尺寸及包裝方式可按客戶要求調整。",
   },
 ];
 
@@ -43,6 +43,178 @@ export default function CustomTissuePage() {
     <main className="min-h-screen bg-[radial-gradient(circle_at_15%_10%,#fff0c2_0%,transparent_28%),radial-gradient(circle_at_85%_20%,#ffe0d0_0%,transparent_30%),linear-gradient(180deg,#fffaf0_0%,#ffffff_45%,#fff7e8_100%)] text-neutral-950">
       <Header />
 
+      <div className="md:hidden">
+        <MobileCustomTissuePage />
+      </div>
+
+      <div className="hidden md:block">
+        <DesktopCustomTissuePage />
+      </div>
+
+      <Footer />
+    </main>
+  );
+}
+
+function MobileCustomTissuePage() {
+  return (
+    <div className="mx-auto max-w-md px-4 pb-10 pt-5">
+      {/* MOBILE HERO */}
+      <section className="overflow-hidden rounded-[1.75rem] border border-orange-100 bg-white shadow-lg">
+        <div className="p-5">
+          <div className="text-sm font-bold text-neutral-500">
+            <a href="/" className="hover:text-[#d71920]">
+              Home
+            </a>
+            <span className="mx-2">›</span>
+            <a href="/products/tissue" className="hover:text-[#d71920]">
+              紙巾類
+            </a>
+            <span className="mx-2">›</span>
+            <span className="text-[#d71920]">定制系列</span>
+          </div>
+
+          <p className="mt-6 text-xs font-black uppercase tracking-[0.35em] text-[#c28a22]">
+            Custom Printing
+          </p>
+
+          <h1 className="mt-3 text-[42px] font-black leading-none text-[#d71920]">
+            定制系列
+          </h1>
+
+          <div className="mt-3 h-1 w-12 rounded-full bg-[#d71920]" />
+
+          <p className="mt-5 text-[15px] leading-7 text-neutral-600">
+            可印刷公司 LOGO、宣傳口號及相關圖案，適合餐飲、酒店、零售、
+            展會及商務送禮使用，提升品牌形象與宣傳效果。
+          </p>
+
+          <div className="mt-6 grid gap-3">
+            <a
+              href="tel:26120793"
+              className="rounded-xl bg-[#d71920] px-5 py-3 text-center text-sm font-black text-white shadow-lg"
+            >
+              致電查詢：26120793
+            </a>
+
+            <a
+              href="#mobile-custom-details"
+              className="rounded-xl border border-[#d71920] bg-white px-5 py-3 text-center text-sm font-black text-[#d71920]"
+            >
+              查看定制內容
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+      {/* MOBILE OPTIONS */}
+      <section id="mobile-custom-details" className="mt-8">
+        <MobileSectionTitle title="可定制內容" />
+
+        <div className="mt-4 grid gap-3">
+          {customOptions.map((item, index) => (
+            <div
+              key={item.title}
+              className="flex gap-4 rounded-[1.4rem] bg-white p-4 shadow-md"
+            >
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#fff3d8] text-lg font-black text-[#d71920]">
+                {index + 1}
+              </div>
+
+              <div>
+                <h3 className="text-lg font-black text-[#d71920]">
+                  {item.title}
+                </h3>
+                <p className="mt-1 text-sm leading-6 text-neutral-600">
+                  {item.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* MOBILE SIZES */}
+      <section className="mt-8">
+        <MobileSectionTitle title="尺寸參考" />
+
+        <p className="mt-3 text-sm leading-6 text-neutral-600">
+          以下尺寸僅供參考，實際尺寸及包裝方式可按客戶要求調整。
+        </p>
+
+        <div className="mt-4 grid gap-3">
+          {sizeGroups.map((group) => (
+            <div
+              key={group.title}
+              className="rounded-[1.4rem] border border-orange-100 bg-white p-4 shadow-md"
+            >
+              <h3 className="text-lg font-black text-[#8a1c12]">
+                {group.title}
+                <span className="ml-1 text-xs font-bold text-neutral-500">
+                  （可按客戶要求調整）
+                </span>
+              </h3>
+
+              <div className="mt-3 flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-xl bg-[#fff7e8] px-3 py-2 text-sm font-bold text-neutral-700"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* MOBILE GALLERY */}
+      <section className="mt-8">
+        <MobileSectionTitle title="客戶定制案例" />
+
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          {galleryImages.map((image, index) => (
+            <div
+              key={image}
+              className="flex h-36 items-center justify-center rounded-[1.25rem] bg-white p-3 shadow-md"
+            >
+              <img
+                src={image}
+                alt={`Custom tissue example ${index + 1}`}
+                className="max-h-full max-w-full rounded-xl object-contain"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* MOBILE PHONE CTA */}
+      <section className="mt-8 rounded-[1.5rem] border border-[#ead9b7] bg-[#fff8ea] p-5 shadow-sm">
+        <h2 className="text-xl font-black text-neutral-950">
+          如需定制紙巾，歡迎致電查詢
+        </h2>
+
+        <p className="mt-2 text-sm leading-6 text-neutral-600">
+          請提供紙巾類型、尺寸、數量及 LOGO/設計資料，我們會協助提供建議。
+        </p>
+
+        <a
+          href="tel:26120793"
+          className="mt-4 block rounded-xl bg-[#d71920] px-5 py-3 text-center text-sm font-black text-white shadow-md"
+        >
+          立即聯絡：26120793
+        </a>
+      </section>
+    </div>
+  );
+}
+
+function DesktopCustomTissuePage() {
+  return (
+    <>
       {/* HERO */}
       <section className="mx-auto max-w-[1440px] px-4 pt-8 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-[2rem] border border-orange-100 bg-white shadow-2xl">
@@ -112,7 +284,10 @@ export default function CustomTissuePage() {
       </section>
 
       {/* OPTIONS */}
-      <section id="details" className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8">
+      <section
+        id="details"
+        className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8"
+      >
         <div className="text-center">
           <p className="text-sm font-black uppercase tracking-[0.3em] text-[#c28a22]">
             Custom Options
@@ -146,9 +321,14 @@ export default function CustomTissuePage() {
             <p className="text-sm font-black uppercase tracking-[0.3em] text-[#c28a22]">
               Size Reference
             </p>
-            <h2 className="mt-2 text-4xl font-black">尺寸參考</h2>
+            <h2 className="mt-2 text-4xl font-black">
+              尺寸參考
+              <span className="ml-2 text-lg font-bold text-neutral-500">
+                （可按客戶要求調整）
+              </span>
+            </h2>
             <p className="mt-4 text-neutral-600">
-              實際尺寸及包裝方式可按客戶要求調整。
+              以下尺寸僅供參考，實際尺寸及包裝方式可按客戶要求調整。
             </p>
           </div>
 
@@ -219,8 +399,15 @@ export default function CustomTissuePage() {
           </a>
         </div>
       </section>
+    </>
+  );
+}
 
-      <Footer />
-    </main>
+function MobileSectionTitle({ title }: { title: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="h-7 w-1 rounded-full bg-[#d71920]" />
+      <h2 className="text-2xl font-black text-neutral-950">{title}</h2>
+    </div>
   );
 }
