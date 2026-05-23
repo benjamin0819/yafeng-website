@@ -350,17 +350,19 @@ function ProductDetailModal({
     <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/55 px-4">
       <div className="relative max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-[2rem] bg-white p-6 shadow-2xl md:p-10">
         <button
+          type="button"
           onClick={onClose}
-          className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-xl font-black hover:bg-neutral-200"
+          aria-label="Close product detail"
+          className="sticky left-full top-0 z-[1000] mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-white text-2xl font-black text-neutral-800 shadow-lg ring-1 ring-neutral-200 hover:bg-neutral-100"
         >
           ×
         </button>
 
-        <div className="relative flex min-h-[620px] items-center justify-center overflow-hidden rounded-[2rem] bg-neutral-50">
+        <div className="relative flex min-h-[320px] items-center justify-center overflow-hidden rounded-[1.5rem] bg-neutral-50 md:min-h-[620px] md:rounded-[2rem]">
           <img
             src={currentImage}
             alt={detail.displayName}
-            className="h-full max-h-[620px] w-full object-contain"
+            className="h-full max-h-[320px] w-full object-contain md:max-h-[620px]"
           />
 
           {galleryImages.length > 1 && (
