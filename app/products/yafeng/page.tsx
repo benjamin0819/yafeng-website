@@ -116,67 +116,12 @@ export default function YafengProductsPage() {
     <main className="min-h-screen bg-[radial-gradient(circle_at_15%_10%,#fff0c2_0%,transparent_28%),radial-gradient(circle_at_85%_20%,#ffe0d0_0%,transparent_30%),linear-gradient(180deg,#fffaf0_0%,#ffffff_45%,#fff7e8_100%)] text-neutral-950">
       <Header />
 
-      <div className="mx-auto max-w-[1440px] px-6 py-20">
-        <a href="/" className="font-bold text-[#d71920]">
-          ← 返回首頁
-        </a>
+      <div className="md:hidden">
+        <MobileYafengProductsPage setSelectedProduct={setSelectedProduct} />
+      </div>
 
-        <h1 className="mt-8 text-6xl font-black text-[#d71920]">
-          雅楓自營產品
-        </h1>
-
-        <p className="mt-5 max-w-3xl text-xl leading-8 text-neutral-600">
-          精選午餐肉、罐頭食品及茶飲產品，適合餐飲、零售及批發客戶。
-        </p>
-
-        <div className="mt-12 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
-          {mainProducts.map((product) => {
-            const detail = getProductDetail(product.nameCn);
-
-            return (
-              <button
-                key={product.id}
-                onClick={() => setSelectedProduct(product)}
-                className="group flex h-full flex-col rounded-[2rem] bg-white p-6 text-left shadow-xl transition hover:-translate-y-1 hover:shadow-2xl"
-              >
-                <div className="flex h-[520px] items-center justify-center overflow-hidden rounded-[1.5rem] bg-neutral-50">
-                  <img
-                    src={detail.posterImage}
-                    alt={detail.displayName}
-                    className="h-full w-full rounded-[1.2rem] object-cover transition group-hover:scale-105"
-                  />
-                </div>
-
-                <div className="flex flex-1 flex-col">
-                  <h2 className="mt-6 min-h-[64px] text-2xl font-black leading-tight text-[#8a1c12]">
-                    {detail.displayName}
-                  </h2>
-
-                  <p className="mt-1 min-h-[24px] font-semibold text-neutral-600">
-                    {detail.specLine}
-                  </p>
-
-                  <p className="mt-3 min-h-[56px] leading-7 text-neutral-600">
-                    {detail.description}
-                  </p>
-
-                  <div className="mt-auto rounded-2xl bg-[#fff7e8] p-4">
-                    <p className="font-black text-[#d71920]">價格 / Price</p>
-                    <div className="mt-2 space-y-1 text-sm font-bold text-neutral-700">
-                      {detail.priceLines.map((line) => (
-                        <p key={line}>{line}</p>
-                      ))}
-                    </div>
-                  </div>
-
-                  <p className="mt-5 font-black text-[#d71920]">
-                    查看詳細介紹 →
-                  </p>
-                </div>
-              </button>
-            );
-          })}
-        </div>
+      <div className="hidden md:block">
+        <DesktopYafengProductsPage setSelectedProduct={setSelectedProduct} />
       </div>
 
       {selectedProduct && (
@@ -185,8 +130,176 @@ export default function YafengProductsPage() {
           onClose={() => setSelectedProduct(null)}
         />
       )}
+
       <Footer />
     </main>
+  );
+}
+
+function DesktopYafengProductsPage({
+  setSelectedProduct,
+}: {
+  setSelectedProduct: React.Dispatch<
+    React.SetStateAction<(typeof mainProducts)[number] | null>
+  >;
+}) {
+  return (
+    <div className="mx-auto max-w-[1440px] px-6 py-20">
+      <a href="/" className="font-bold text-[#d71920]">
+        ← 返回首頁
+      </a>
+
+      <h1 className="mt-8 text-6xl font-black text-[#d71920]">
+        雅楓自營產品
+      </h1>
+
+      <p className="mt-5 max-w-3xl text-xl leading-8 text-neutral-600">
+        精選午餐肉、罐頭食品及茶飲產品，適合餐飲、零售及批發客戶。
+      </p>
+
+      <div className="mt-12 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
+        {mainProducts.map((product) => {
+          const detail = getProductDetail(product.nameCn);
+
+          return (
+            <button
+              key={product.id}
+              onClick={() => setSelectedProduct(product)}
+              className="group flex h-full flex-col rounded-[2rem] bg-white p-6 text-left shadow-xl transition hover:-translate-y-1 hover:shadow-2xl"
+            >
+              <div className="flex h-[520px] items-center justify-center overflow-hidden rounded-[1.5rem] bg-neutral-50">
+                <img
+                  src={detail.posterImage}
+                  alt={detail.displayName}
+                  className="h-full w-full rounded-[1.2rem] object-cover transition group-hover:scale-105"
+                />
+              </div>
+
+              <div className="flex flex-1 flex-col">
+                <h2 className="mt-6 min-h-[64px] text-2xl font-black leading-tight text-[#8a1c12]">
+                  {detail.displayName}
+                </h2>
+
+                <p className="mt-1 min-h-[24px] font-semibold text-neutral-600">
+                  {detail.specLine}
+                </p>
+
+                <p className="mt-3 min-h-[56px] leading-7 text-neutral-600">
+                  {detail.description}
+                </p>
+
+                <div className="mt-auto rounded-2xl bg-[#fff7e8] p-4">
+                  <p className="font-black text-[#d71920]">價格 / Price</p>
+                  <div className="mt-2 space-y-1 text-sm font-bold text-neutral-700">
+                    {detail.priceLines.map((line) => (
+                      <p key={line}>{line}</p>
+                    ))}
+                  </div>
+                </div>
+
+                <p className="mt-5 font-black text-[#d71920]">
+                  查看詳細介紹 →
+                </p>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function MobileYafengProductsPage({
+  setSelectedProduct,
+}: {
+  setSelectedProduct: React.Dispatch<
+    React.SetStateAction<(typeof mainProducts)[number] | null>
+  >;
+}) {
+  return (
+    <div className="mx-auto max-w-md px-4 py-6">
+      <a href="/" className="text-sm font-bold text-[#d71920]">
+        ← 返回首頁
+      </a>
+
+      <section className="mt-5 rounded-[2rem] border border-[#f3e7cf] bg-[#fffaf0] px-5 pb-6 pt-7 shadow-sm">
+        <h1 className="text-[42px] font-black leading-[0.95] tracking-tight text-[#d71920]">
+          雅楓自營產品
+        </h1>
+
+        <div className="mt-4 flex items-center gap-2 text-[#d71920]">
+          <span className="h-[2px] w-8 bg-[#d71920]" />
+          <span className="text-sm">★ ★ ★</span>
+          <span className="h-[2px] w-8 bg-[#d71920]" />
+        </div>
+
+        <p className="mt-5 text-[17px] leading-8 text-neutral-500">
+          精選午餐肉、罐頭食品及茶飲產品，
+          適合餐飲、零售及批發客戶。
+        </p>
+      </section>
+
+      <section className="mt-5 grid grid-cols-2 gap-4">
+        {mainProducts.map((product) => {
+          const detail = getProductDetail(product.nameCn);
+
+          return (
+            <button
+              key={product.id}
+              onClick={() => setSelectedProduct(product)}
+              className="flex flex-col rounded-[1.5rem] border border-[#f1eadf] bg-white p-3 text-left shadow-sm"
+            >
+              <div className="overflow-hidden rounded-[1.2rem] bg-[#fff8ef]">
+                <img
+                  src={detail.posterImage}
+                  alt={detail.displayName}
+                  className="aspect-[4/3] w-full object-cover"
+                />
+              </div>
+
+              <div className="mt-3 flex flex-1 flex-col">
+                <h2 className="line-clamp-2 text-[15px] font-black leading-6 text-neutral-900">
+                  {detail.displayName}
+                </h2>
+
+                <p className="mt-1 text-[12px] leading-5 text-neutral-500">
+                  {detail.specLine}
+                </p>
+
+                <div className="mt-3 flex items-center justify-end">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#fff3f0] text-xl font-black text-[#d71920]">
+                    →
+                  </span>
+                </div>
+              </div>
+            </button>
+          );
+        })}
+      </section>
+
+      <section className="mt-6 rounded-[1.5rem] border border-[#ead9b7] bg-[#fff8ea] px-4 py-4 shadow-sm">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-start gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#d71920] text-2xl text-white">
+              ☎
+            </div>
+
+            <div>
+              <h3 className="text-[18px] font-black text-neutral-900">
+                需要更多產品資訊或報價？
+              </h3>
+              <p className="mt-1 text-sm leading-6 text-neutral-500">
+                我們的專業團隊隨時為您提供協助
+              </p>
+            </div>
+          </div>
+
+          <button className="shrink-0 rounded-2xl bg-[#d71920] px-5 py-3 text-sm font-black text-white shadow-md hover:bg-[#b51218]">
+            立即報價 →
+          </button>
+        </div>
+      </section>
+    </div>
   );
 }
 
