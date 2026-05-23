@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
 
@@ -56,6 +59,57 @@ export default function CustomTissuePage() {
   );
 }
 
+function PhoneDropdown({
+  buttonText = "致電查詢",
+  buttonClassName = "rounded-xl bg-[#d71920] px-5 py-3 text-center text-sm font-black text-white shadow-lg",
+}: {
+  buttonText?: string;
+  buttonClassName?: string;
+}) {
+  const [phoneOpen, setPhoneOpen] = useState(false);
+
+  return (
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setPhoneOpen((open) => !open)}
+        className={buttonClassName}
+      >
+        {buttonText}
+      </button>
+
+      {phoneOpen && (
+        <div className="absolute left-0 right-0 top-[52px] z-50 overflow-hidden rounded-2xl border border-orange-100 bg-white shadow-2xl">
+          <a
+            href="tel:26120783"
+            className="block px-5 py-4 text-center text-sm font-black text-[#d71920] hover:bg-[#fff3d8]"
+          >
+            公司電話：26120783
+          </a>
+
+          <div className="h-px bg-orange-100" />
+
+          <a
+            href="tel:90236020"
+            className="block px-5 py-4 text-center text-sm font-black text-[#d71920] hover:bg-[#fff3d8]"
+          >
+            90236020 孫小姐
+          </a>
+
+          <div className="h-px bg-orange-100" />
+
+          <a
+            href="tel:63888290"
+            className="block px-5 py-4 text-center text-sm font-black text-[#d71920] hover:bg-[#fff3d8]"
+          >
+            63888290 吳小姐
+          </a>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function MobileCustomTissuePage() {
   return (
     <div className="mx-auto max-w-md px-4 pb-10 pt-5">
@@ -90,12 +144,10 @@ function MobileCustomTissuePage() {
           </p>
 
           <div className="mt-6 grid gap-3">
-            <a
-              href="tel:26120783"
-              className="rounded-xl bg-[#d71920] px-5 py-3 text-center text-sm font-black text-white shadow-lg"
-            >
-              致電查詢：26120783
-            </a>
+            <PhoneDropdown
+              buttonText="致電查詢"
+              buttonClassName="w-full rounded-xl bg-[#d71920] px-5 py-3 text-center text-sm font-black text-white shadow-lg"
+            />
 
             <a
               href="#mobile-custom-details"
@@ -201,12 +253,12 @@ function MobileCustomTissuePage() {
           請提供紙巾類型、尺寸、數量及 LOGO/設計資料，我們會協助提供建議。
         </p>
 
-        <a
-          href="tel:26120783"
-          className="mt-4 block rounded-xl bg-[#d71920] px-5 py-3 text-center text-sm font-black text-white shadow-md"
-        >
-          立即聯絡：26120783
-        </a>
+        <div className="mt-4">
+          <PhoneDropdown
+            buttonText="立即聯絡"
+            buttonClassName="w-full rounded-xl bg-[#d71920] px-5 py-3 text-center text-sm font-black text-white shadow-md"
+          />
+        </div>
       </section>
     </div>
   );
@@ -254,12 +306,10 @@ function DesktopCustomTissuePage() {
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
-                <a
-                  href="tel:26120783"
-                  className="rounded-xl bg-[#d71920] px-7 py-4 font-black text-white shadow-lg transition hover:bg-[#a80f15]"
-                >
-                  致電查詢：26120783
-                </a>
+                <PhoneDropdown
+                  buttonText="致電查詢"
+                  buttonClassName="rounded-xl bg-[#d71920] px-7 py-4 font-black text-white shadow-lg transition hover:bg-[#a80f15]"
+                />
 
                 <a
                   href="#details"
@@ -391,12 +441,10 @@ function DesktopCustomTissuePage() {
             </p>
           </div>
 
-          <a
-            href="tel:26120783"
-            className="shrink-0 rounded-xl bg-[#d71920] px-8 py-4 text-center text-lg font-black text-white shadow-lg transition hover:bg-[#a80f15]"
-          >
-            致電：26120783
-          </a>
+          <PhoneDropdown
+            buttonText="致電查詢"
+            buttonClassName="shrink-0 rounded-xl bg-[#d71920] px-8 py-4 text-center text-lg font-black text-white shadow-lg transition hover:bg-[#a80f15]"
+          />
         </div>
       </section>
     </>
