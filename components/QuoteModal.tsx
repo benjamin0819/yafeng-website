@@ -1,5 +1,6 @@
 "use client";
 
+import { FormEvent, useState } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 
 type QuoteModalProps = {
@@ -14,7 +15,24 @@ export default function QuoteModal({
   productName = "",
 }: QuoteModalProps) {
   const [state, handleSubmit] = useForm("xykvgpgl");
+  const [contactError, setContactError] = useState("");
 
+  function submitQuote(event: FormEvent<HTMLFormElement>) {
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const phone = String(formData.get("phone") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+
+    if (!phone && !email) {
+      event.preventDefault();
+      setContactError("請至少填寫電話或 Email 其中一項，方便我們回覆您。");
+      return;
+    }
+
+    setContactError("");
+    handleSubmit(event);
+  }
   if (!open) return null;
 
   return (
@@ -70,7 +88,7 @@ export default function QuoteModal({
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-6 grid gap-4 sm:mt-8 sm:gap-5">
+            <form onSubmit={submitQuote} className="mt-6 grid gap-4 sm:mt-8 sm:gap-5">
               <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
                 <Field
                   label="公司名稱 / Company Name"
@@ -86,23 +104,44 @@ export default function QuoteModal({
                   required
                 />
               </div>
+              {contactError && (
+                <p className="-mt-2 text-sm font-bold text-[#d71920]">
+                  {contactError}
+                </p>
+              )}
 
               <div className="grid grid-cols-2 gap-3 sm:gap-5">
-                <Field label="電話 / Phone" name="phone" icon="☎️" required />
-                <Field label="Email" name="email" type="email" icon="✉️" required />
+                <Field
+                  label="電話 / Phone"
+                  name="phone"
+                  icon="☎️"
+                  placeholder="電話或 Email 至少填一項"
+                />
+
+                <Field
+                  label="Email"
+                  name="email"
+                  type="email"
+                  icon="✉️"
+                  placeholder="電話或 Email 至少填一項"
+                />
               </div>
 
               <div>
                 <label className="font-black text-neutral-800">
-                  感興趣產品 / Interested Products
+                  詢價產品及數量 / Products & Quantity
                 </label>
 
-                <div className="mt-2 flex items-center rounded-xl border border-orange-100 bg-white px-3 focus-within:border-[#d71920]">
-                  <span className="mr-2 text-neutral-400">🏷️</span>
-                  <input
-                    name="interested_products"
-                    defaultValue={productName}
-                    placeholder="例如：小卷紙系列、雅楓午餐肉、紙巾定制等"
+                <div className="mt-2 flex items-start rounded-xl border border-orange-100 bg-white px-3 focus-within:border-[#d71920]">
+                  <span className="mr-2 mt-3 text-neutral-400">📦</span>
+                  <textarea
+                    name="products_and_quantity"
+                    rows={4}
+                    defaultValue={productName ? `${productName}：` : ""}
+                    placeholder={`請填寫需要報價的產品及數量，例如：
+小卷紙系列 100箱
+雅楓午餐肉 50箱
+紙巾定制 500盒`}
                     className="w-full bg-transparent py-3 text-sm outline-none sm:text-base"
                     required
                   />
@@ -110,12 +149,6 @@ export default function QuoteModal({
               </div>
 
               <div className="grid grid-cols-2 gap-3 sm:gap-5">
-                <Field
-                  label="預計數量 / Quantity"
-                  name="quantity"
-                  icon="📦"
-                  placeholder="例如：100箱"
-                />
 
                 <Field
                   label="送貨地區 / Delivery Area"
