@@ -107,7 +107,21 @@ function getProductDetail(productName: string) {
   };
 }
 
+function sortYafengProductsFirst(products: typeof mainProducts) {
+  return [...products].sort((a, b) => {
+    const aIsYafeng = a.nameCn.includes("雅楓");
+    const bIsYafeng = b.nameCn.includes("雅楓");
+
+    if (aIsYafeng && !bIsYafeng) return -1;
+    if (!aIsYafeng && bIsYafeng) return 1;
+
+    return 0;
+  });
+}
+
 export default function YafengProductsPage() {
+  const sortedProducts = sortYafengProductsFirst(mainProducts);
+
   const [selectedProduct, setSelectedProduct] = useState<
     (typeof mainProducts)[number] | null
   >(null);
@@ -117,11 +131,17 @@ export default function YafengProductsPage() {
       <Header />
 
       <div className="md:hidden">
-        <MobileYafengProductsPage setSelectedProduct={setSelectedProduct} />
+        <MobileYafengProductsPage
+          products={sortedProducts}
+          setSelectedProduct={setSelectedProduct}
+        />
       </div>
 
       <div className="hidden md:block">
-        <DesktopYafengProductsPage setSelectedProduct={setSelectedProduct} />
+        <DesktopYafengProductsPage
+          products={sortedProducts}
+          setSelectedProduct={setSelectedProduct}
+        />
       </div>
 
       {selectedProduct && (
@@ -137,8 +157,10 @@ export default function YafengProductsPage() {
 }
 
 function DesktopYafengProductsPage({
+  products,
   setSelectedProduct,
 }: {
+  products: typeof mainProducts;
   setSelectedProduct: React.Dispatch<
     React.SetStateAction<(typeof mainProducts)[number] | null>
   >;
@@ -158,7 +180,7 @@ function DesktopYafengProductsPage({
       </p>
 
       <div className="mt-12 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
-        {mainProducts.map((product) => {
+        {products.map((product) => {
           const detail = getProductDetail(product.nameCn);
 
           return (
@@ -210,8 +232,10 @@ function DesktopYafengProductsPage({
 }
 
 function MobileYafengProductsPage({
+  products,
   setSelectedProduct,
 }: {
+  products: typeof mainProducts;
   setSelectedProduct: React.Dispatch<
     React.SetStateAction<(typeof mainProducts)[number] | null>
   >;
@@ -240,7 +264,7 @@ function MobileYafengProductsPage({
       </section>
 
       <section className="mt-5 grid grid-cols-2 gap-4">
-        {mainProducts.map((product) => {
+        {products.map((product) => {
           const detail = getProductDetail(product.nameCn);
 
           return (

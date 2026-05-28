@@ -171,19 +171,33 @@ function getOwnProductDetail(product: ProductLike) {
   };
 }
 
+function sortYafengProductsFirst(products: typeof mainProducts) {
+  return [...products].sort((a, b) => {
+    const aIsYafeng = a.nameCn.includes("雅楓");
+    const bIsYafeng = b.nameCn.includes("雅楓");
+
+    if (aIsYafeng && !bIsYafeng) return -1;
+    if (!aIsYafeng && bIsYafeng) return 1;
+
+    return 0;
+  });
+}
+
 export default function HomePage() {
+  const sortedProducts = sortYafengProductsFirst(mainProducts);
+
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const current = mainProducts[activeSlide];
+  const current = sortedProducts[activeSlide];
   const currentDetail = getOwnProductDetail(current);
 
   const nextSlide = () => {
-    setActiveSlide((value) => (value + 1) % mainProducts.length);
+    setActiveSlide((value) => (value + 1) % sortedProducts.length);
   };
 
   const prevSlide = () => {
     setActiveSlide(
-      (value) => (value - 1 + mainProducts.length) % mainProducts.length
+      (value) => (value - 1 + sortedProducts.length) % sortedProducts.length
     );
   };
 
@@ -285,7 +299,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="mt-5 flex justify-center gap-2">
-                    {mainProducts.map((product, index) => (
+                    {sortedProducts.map((product, index) => (
                       <button
                         key={product.id}
                         aria-label={`Show ${product.nameCn}`}
@@ -344,7 +358,7 @@ export default function HomePage() {
           />
 
           <div className="mt-10 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
-            {mainProducts.map((product) => {
+            {sortedProducts.map((product) => {
               const detail = getOwnProductDetail(product);
 
               return (
@@ -476,9 +490,9 @@ function MobileHomePage() {
   ];
 
   const mobileFeaturedProducts = [
-    ownProductDetails.cmee,
     ownProductDetails.yafengLunch,
     ownProductDetails.yafengSpiced,
+    ownProductDetails.cmee,
     ownProductDetails.tea,
   ];
 
