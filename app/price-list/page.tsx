@@ -3,10 +3,10 @@ import Footer from "../../components/Footer";
 
 export default function PriceListPage() {
   const docUrl1 =
-    "https://1drv.ms/w/c/a27d446b6be6c689/IQRa0knC_z4ETppLLR1kHLgwATW5ehLjQH93foMAApSaJ34";
+    "https://1drv.ms/w/c/a27d446b6be6c689/IQBa0knC_z4ETppLLR1kHLgwAd2ExGn3KjlyS8HmY7EAs7U?e=NjndSa";
 
   const excelUrl2 =
-    "https://1drv.ms/x/c/a27d446b6be6c689/IQQGUI7f4qCwQbX5o6BWk2pVAezKkATUVf37OX8XZmZFrGI";
+    "https://1drv.ms/x/c/a27d446b6be6c689/IQAGUI7f4qCwQbX5o6BWk2pVAU54DMcu81oc-6hSXcZFOwk?e=Qiq3v4";
 
   return (
     <main className="min-h-screen bg-[radial-gradient(circle_at_15%_10%,#fff0c2_0%,transparent_28%),radial-gradient(circle_at_85%_20%,#ffe0d0_0%,transparent_30%),linear-gradient(180deg,#fffaf0_0%,#ffffff_45%,#fff7e8_100%)] text-neutral-950">
