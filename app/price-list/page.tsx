@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 
 export default function PriceListPage() {
   const docUrl1 =
-    "https://docs.google.com/document/d/15-UloOHDqnFZHbRkD7no2sW7tOsnnR8ZyszlSM6UF0w/edit?usp=sharing";
+    "https://docs.google.com/document/d/15-UloOHDqnFZHbRkD7no2sW7tOsnnR8ZyszlSM6UF0w/preview";
 
   const excelUrl2 =
     "https://1drv.ms/x/c/a27d446b6be6c689/IQAGUI7f4qCwQbX5o6BWk2pVAU54DMcu81oc-6hSXcZFOwk?e=Qiq3v4";
