@@ -75,7 +75,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/15 py-4 text-center text-sm text-white/70">
-        © 2026 Yafeng Group Development Limited. Website prototype.
+        © 2026 Yafeng Group Development Limited.
       </div>
     </footer>
   );
