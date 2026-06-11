@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useEffect, useState } from "react";
+import type { SyntheticEvent } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 
 type QuoteModalProps = {
@@ -17,7 +18,7 @@ export default function QuoteModal({
   const [state, handleSubmit] = useForm("xykvgpgl");
   const [contactError, setContactError] = useState("");
 
-  function submitQuote(event: FormEvent<HTMLFormElement>) {
+  function submitQuote(event: SyntheticEvent<HTMLFormElement>) {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
@@ -31,18 +32,35 @@ export default function QuoteModal({
     }
 
     setContactError("");
-    handleSubmit(event);
+    handleSubmit(event as any);
   }
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open, onClose]);
+
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/55 p-2 sm:p-4">
-      <div className="relative max-h-[94vh] w-full max-w-[96vw] overflow-y-auto rounded-[1.5rem] bg-white p-5 shadow-2xl sm:max-w-3xl sm:rounded-[2rem] sm:p-6 md:p-8">
+    <div className="fixed inset-0 z-[999] flex items-start justify-center overflow-y-auto overflow-x-hidden bg-black/55 p-2 sm:p-4">
+      <div className="relative my-4 max-h-[94vh] w-full max-w-[96vw] overflow-y-auto overflow-x-hidden rounded-[1.5rem] bg-white p-5 shadow-2xl sm:max-w-3xl sm:rounded-[2rem] sm:p-6 md:p-8">
         <button
           type="button"
           onClick={onClose}
           aria-label="Close quote form"
-          className="sticky left-full top-0 z-50 mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-xl font-black text-neutral-700 shadow-sm hover:bg-neutral-200 sm:absolute sm:right-5 sm:top-5 sm:mb-0"
+          className="absolute right-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-xl font-black text-neutral-700 shadow-md hover:bg-neutral-200"
         >
           ×
         </button>
@@ -67,7 +85,7 @@ export default function QuoteModal({
           </div>
         ) : (
           <>
-            <div className="flex items-start justify-between gap-4">
+            <div className="flex items-start justify-between gap-4 pr-12">
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.35em] text-[#c28a22] sm:text-sm">
                   Request Quote
@@ -148,8 +166,7 @@ export default function QuoteModal({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 sm:gap-5">
-
+              <div>
                 <Field
                   label="送貨地區 / Delivery Area"
                   name="delivery_area"

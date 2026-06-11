@@ -187,6 +187,7 @@ export default function HomePage() {
   const sortedProducts = sortYafengProductsFirst(mainProducts);
 
   const [activeSlide, setActiveSlide] = useState(0);
+  const [quoteOpen, setQuoteOpen] = useState(false);
 
   const current = sortedProducts[activeSlide];
   const currentDetail = getOwnProductDetail(current);
@@ -253,18 +254,19 @@ export default function HomePage() {
 
                 <div className="mt-8 flex flex-wrap gap-3 md:gap-4">
                   <a
-                    href="#products"
+                    href="/price-list"
                     className="rounded-xl bg-[#d71920] px-6 py-3 md:px-7 md:py-4 text-base font-black text-white shadow-lg transition hover:bg-[#a80f15]"
                   >
-                    瀏覽產品
+                    查看報價單
                   </a>
 
-                  <a
-                    href="#quote"
+                  <button
+                    type="button"
+                    onClick={() => setQuoteOpen(true)}
                     className="rounded-xl border border-white/70 px-6 py-3 md:px-7 md:py-4 text-base font-black text-white transition hover:bg-white/10"
                   >
                     獲取報價
-                  </a>
+                  </button>
                 </div>
 
                 <div className="mt-8 grid max-w-xl grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
@@ -457,6 +459,13 @@ export default function HomePage() {
           </div>
         </section>
       </div>
+
+      <QuoteModal
+        open={quoteOpen}
+        onClose={() => setQuoteOpen(false)}
+        productName=""
+      />
+
       <Footer />
     </main>
   );
