@@ -58,7 +58,7 @@ export default function PriceListPage() {
         {/* Mobile version: cards only, no iframe */}
         <div className="mt-8 grid gap-5 md:hidden">
           <MobilePriceCard
-            type="Word"
+            type="GoogleDocs"
             title="餐飲糧油雜貨報價單"
             subtitle="Food, Grocery & Restaurant Supplies Price List"
             description="包括米類、粉麵類、調味料、罐頭類、茶類飲品、急凍食品及其他餐飲供應產品。"
@@ -67,7 +67,7 @@ export default function PriceListPage() {
           />
 
           <MobilePriceCard
-            type="Excel"
+            type="GoogleSheets"
             title="清潔用品報價單"
             subtitle="Cleaning Supplies Price List"
             description="包括清潔用品、紙品、消耗品及其他商用清潔相關產品。"
@@ -90,7 +90,7 @@ export default function PriceListPage() {
         {/* Desktop version: iframe preview */}
         <div className="hidden md:block">
           <PriceListEmbed
-            type="Word"
+            type="GoogleDocs"
             title="餐飲糧油雜貨報價單"
             subtitle="Food, Grocery & Restaurant Supplies Price List"
             description="包括米類、粉麵類、調味料、罐頭類、茶類飲品、急凍食品及其他餐飲供應產品。"
@@ -99,7 +99,7 @@ export default function PriceListPage() {
           />
 
           <PriceListEmbed
-            type="Excel"
+            type="GoogleSheets"
             title="清潔用品報價單"
             subtitle="Cleaning Supplies Price List"
             description="包括清潔用品、紙品、消耗品及其他商用清潔相關產品。"
@@ -122,7 +122,7 @@ function MobilePriceCard({
   href,
   buttonText,
 }: {
-  type: "Word" | "Excel";
+  type: "GoogleDocs" | "GoogleSheets";
   title: string;
   subtitle: string;
   description: string;
@@ -130,7 +130,13 @@ function MobilePriceCard({
   buttonText: string;
 }) {
   const badgeClass =
-    type === "Word" ? "bg-[#185abd]" : "bg-[#16823a]";
+    type === "GoogleDocs" ? "bg-[#4285f4]" : "bg-[#0f9d58]";
+
+  const fileName =
+    type === "GoogleDocs" ? "Google Docs" : "Google Sheets";
+
+  const fileIcon =
+    type === "GoogleDocs" ? "D" : "S";
 
   return (
     <section className="overflow-hidden rounded-[1.75rem] border border-orange-100 bg-white shadow-lg">
@@ -165,21 +171,21 @@ function MobilePriceCard({
             <div
               className={`flex h-7 w-7 items-center justify-center rounded-md text-xs font-black text-white ${badgeClass}`}
             >
-              {type === "Word" ? "W" : "X"}
+              {fileIcon}
             </div>
 
             <div>
               <p className="text-xs font-black text-neutral-800">
-                雲端{type === "Word" ? "Word" : "Excel"}報價單
+                雲端{fileName}報價單
               </p>
               <p className="text-[10px] text-neutral-500">
-                Microsoft {type === "Word" ? "Word" : "Excel"} Online
+                {fileName}
               </p>
             </div>
           </div>
 
           <div className="p-3">
-            {type === "Word" ? <WordPreviewSkeleton /> : <ExcelPreviewSkeleton />}
+            {type === "GoogleDocs" ? <WordPreviewSkeleton /> : <ExcelPreviewSkeleton />}
 
             <div className="mt-3 flex items-center justify-between text-xs font-bold text-neutral-500">
               <span>雲端同步更新</span>
@@ -201,9 +207,8 @@ function WordPreviewSkeleton() {
         {Array.from({ length: 18 }).map((_, index) => (
           <div
             key={index}
-            className={`h-4 rounded-sm ${
-              index % 4 === 0 ? "bg-[#fff3d8]" : "bg-neutral-100"
-            }`}
+            className={`h-4 rounded-sm ${index % 4 === 0 ? "bg-[#fff3d8]" : "bg-neutral-100"
+              }`}
           />
         ))}
       </div>
@@ -217,9 +222,8 @@ function ExcelPreviewSkeleton() {
       {Array.from({ length: 24 }).map((_, index) => (
         <div
           key={index}
-          className={`h-5 rounded-sm ${
-            index % 5 === 0 ? "bg-[#fff3d8]" : "bg-neutral-100"
-          }`}
+          className={`h-5 rounded-sm ${index % 5 === 0 ? "bg-[#fff3d8]" : "bg-neutral-100"
+            }`}
         />
       ))}
     </div>
@@ -234,7 +238,7 @@ function PriceListEmbed({
   fileUrl,
   buttonText,
 }: {
-  type: "Word" | "Excel";
+  type: "GoogleDocs" | "GoogleSheets";
   title: string;
   subtitle: string;
   description: string;
@@ -260,7 +264,7 @@ function PriceListEmbed({
           </p>
 
           <p className="mt-2 text-sm font-bold text-neutral-500">
-            文件類型：Microsoft {type}
+            文件類型：{type === "GoogleDocs" ? "Google Docs" : "Google Sheets"}
           </p>
         </div>
 
