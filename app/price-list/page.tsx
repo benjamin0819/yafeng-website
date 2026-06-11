@@ -6,7 +6,7 @@ export default function PriceListPage() {
     "https://docs.google.com/document/d/1DMEnBPxPcnHeomx-kSqICto6Y5vY_zPx/preview";
 
   const excelUrl2 =
-    "https://1drv.ms/x/c/a27d446b6be6c689/IQAGUI7f4qCwQbX5o6BWk2pVAU54DMcu81oc-6hSXcZFOwk?e=Qiq3v4";
+    "https://docs.google.com/spreadsheets/d/1gDPAZGHAcak1jRYNqx51RLg2OAYIhFCJ/preview";
 
   return (
     <main className="min-h-screen bg-[radial-gradient(circle_at_15%_10%,#fff0c2_0%,transparent_28%),radial-gradient(circle_at_85%_20%,#ffe0d0_0%,transparent_30%),linear-gradient(180deg,#fffaf0_0%,#ffffff_45%,#fff7e8_100%)] text-neutral-950">
