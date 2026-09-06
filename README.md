@@ -22,3 +22,9 @@ Live website: https://www.yafenggroup.com.hk
 - Downloadable product documents
 - Company contact information
 - Custom domain deployment
+
+## Permission Notice
+
+This source code is published with permission from Yafeng Group.
+
+The website was developed for Yafeng Group, and permission was obtained before making the code publicly available.
